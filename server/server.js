@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const socketIO = require('socket.io');
 const cors = require('cors');
-const dotenv = require('dotenv');   
+const dotenv = require('dotenv');
 
 const http = require('http');
 
@@ -21,24 +21,30 @@ app.use(express.json());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser:   
- true,
+  useNewUrlParser: true,
   useUnifiedTopology: true
 })
   .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.error('MongoDB connection   
- error:', err));
+  .catch(err => console.error('MongoDB connection error:', err));
 
 // Socket.IO setup
 const server = http.createServer(app);
-const io = socketIO(server);
-
+const io = new Server(server, {
+    cors: {
+        origin: "rapidunlock.com" //frontend URL
+    }
+});
 io.on('connection', (socket) => {
-  // ... (Socket.IO event handlers)
+  console.log('A user connected');
+  // Handle socket events here
+  socket.on('disconnect', () => {
+      console.log('User disconnected'); 
+  });
 });
 
 // Routes
 app.use('/api/users', userRoutes);
+app.use('/api/service-requests', serviceRequestRoutes);
 
 // Error handling middleware
 app.use(errorMiddleware);

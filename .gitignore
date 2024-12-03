@@ -1,1 +1,42 @@
+# Node.js dependencies
 node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+
+# Cache
+.cache/
+.next/
+
+# Editor and OS-specific files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
+.idea/
+
+# React-specific
+public/*.cache
+public/*.map
+*.test.js
+*.test.jsx
+coverage/
+
+# Production build
+client/build/
+
+# Misc
+*.swp
+*.swo
